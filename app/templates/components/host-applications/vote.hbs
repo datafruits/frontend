@@ -1,0 +1,14 @@
+<button
+  {{on "click" this.upVote}}
+  class="btn"
+  disabled={{this.canUpVote}}
+  >
+  Yep
+</button>
+<button
+  {{on "click" this.downVote}}
+  class="btn"
+  disabled={{this.canDownVote}}
+  >
+  Nope
+</button>

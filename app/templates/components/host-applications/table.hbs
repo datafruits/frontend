@@ -1,0 +1,42 @@
+<table class="table table-striped">
+  <thead>
+    <th>email</th>
+    <th>created at</th>
+    <th>username</th>
+    <th>link</th>
+    <th>homepage</th>
+    <th>interval</th>
+    <th>desired time</th>
+    <th>approve</th>
+  </thead>
+  <tbody>
+    {{#each @hostApplications as |hostApplication| }}
+      <tr>
+        <td>{{ hostApplication.email }}</td>
+        <td>{{ hostApplication.createdAt}}</td>
+        <td>{{ hostApplication.username }}</td>
+        <td>{{ hostApplication.link }}</td>
+        <td>{{ hostApplication.homepageUrl }}</td>
+        <td>{{ hostApplication.interval }}</td>
+        <td>{{ hostApplication.desiredTime }}</td>
+        <td>
+          <HostApplications::Vote
+            @hostApplication={{hostApplication}}
+          />
+        </td>
+        {{#if hostApplication.approved}}
+          <td>Approved</td>
+        {{else if this.currentUser.isAdmin}}
+          <td>
+            <button
+              {{on "click" this.approve}}
+              class="btn"
+             >
+              Approve
+            </button>
+          </td>
+        {{/if}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
