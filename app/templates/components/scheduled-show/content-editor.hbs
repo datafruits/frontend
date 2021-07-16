@@ -1,4 +1,7 @@
-<ModalDialog @translucentOverlay={{true}}>
+<ModalDialog
+  @targetAttachment="center"
+  @translucentOverlay={{true}}
+  @clickOutsideToClose={{true}}>
   <div class="flex">
     <div class="">
       <Tracks::List

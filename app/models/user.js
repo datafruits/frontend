@@ -1,5 +1,4 @@
 import Model, { attr } from "@ember-data/model";
-import { tracked } from "@glimmer/tracking";
 
 export default class User extends Model {
   @attr username;

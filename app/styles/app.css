@@ -1,8 +1,5 @@
-// @import 'font-awesome/scss/font-awesome.scss';
-@import 'addons/ember-calendar/paint-core';
-@import 'addons/ember-calendar/main';
-@import "ember-modal-dialog/ember-modal-structure";
-@import "ember-modal-dialog/ember-modal-appearance";
+@import "ember-modal-dialog/ember-modal-structure.css";
+@import "ember-modal-dialog/ember-modal-appearance.css";
 
 @tailwind base;
 
@@ -32,7 +29,7 @@
 }
 
 .btn:focus {
- @apply shadow-outline outline-none;
+  @apply ring outline-none;
 }
 
 .btn:active {

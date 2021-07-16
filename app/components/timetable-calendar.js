@@ -54,6 +54,12 @@ export default class TimetableCalendar extends Component {
   }
 
   @action
+  newShow(event){
+    console.log('newShow action in timetable-calendar component');
+    this.router.transitionTo("authenticated.schedule.new");
+  }
+
+  @action
   calendarClickOccurrence(occurrence) {
     console.log(`clicked occurrence: ${occurrence}`);
   }

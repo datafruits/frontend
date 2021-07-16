@@ -1,39 +1,32 @@
 <h1>{{this.shows.length}}</h1>
-{{log this.shows}}
 <span {{did-insert this.performTask @query}}></span>
 <span {{did-update this.performTask @query}}></span>
 {{#if this.fetchData.isRunning}}
   <p>loading</p>
+  <ShrimpCalendar />
 {{else}}
-  <AsCalendar
-    @occurrences={{this.shows}}
-    @dayStartingTime="0:00"
-    @dayEndingTime="23:00"
-    @timeSlotDuration="00:30"
-    @nowTimeLabelFormat="kk:mm"
-    @type={{@view}}
-    @onNavigate={{action "calendarNavigate"}}
-    @onClickOccurrence={{action "calendarClickOccurrence"}}
-    @onAddOccurrence={{action "calendarAddOccurrence"}}
-    @onUpdateOccurrence={{action "calendarUpdateOccurrence"}}
-    @onEditOccurrence={{action "calendarEditOccurrence"}}
-    @onRemoveOccurrence={{action "calendarRemoveOccurrence"}}
-    @startingDate={{this.startingDate}}
-    @onTypeChange={{this.onTypeChange}} as |occurrence timetable calendar|
-  >
-    <AsCalendar::Occurrence
-      @model={{occurrence}}
-      @isMonthView={{occurrence.calendar.isMonthView}}
-      @timeSlotHeight={{calendar.timeSlotHeight}}
-      @timeSlotDuration={{calendar.timeSlotDuration}} as |model|
-    >
-      {{!-- template-lint-disable no-inline-styles --}}
-      <h1 class="as-calendar-occurrence__title" style={{titleStyle}}>
-        {{model.recurringInterval}}
-        <LinkTo @route="authenticated.schedule.show" @model={{model.content.id}} @title={{model.title}}>
+  <ShrimpCalendar
+    @onDayclick={{this.newShow}}
+    @events={{this.shows}}
+      as |model|>
+    {{!-- template-lint-disable no-inline-styles --}}
+    <div class="bg-red-400 text-white mb-1">
+      <div class="bg-red-600 flex justify-between items-center p-1">
+        <span class="font-extrabold text-xs">{{model.startFormatted}} - {{model.endFormatted}}</span>
+        {{#if (not (eq model.recurringInterval "not_recurring"))}}
+          <span
+            class="text-xs rounded-lg p-1 border-2 border-white
+              {{model.recurringBgColor}}
+            ">
+            {{model.recurringFormatted}}
+          </span>
+        {{/if}}
+      </div>
+      <h1 class="p-1" style={{titleStyle}}>
+        <LinkTo @route="authenticated.schedule.show" @model={{model}} @title={{model.title}}>
           {{model.title}}
         </LinkTo>
       </h1>
-    </AsCalendar::Occurrence>
-  </AsCalendar>
+    </div>
+  </ShrimpCalendar>
 {{/if}}

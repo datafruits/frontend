@@ -33,6 +33,32 @@
     </div>
 
     <div class="mb-4">
+      <label for="promote-show">Live Broadcast</label>
+      <Input
+        @type="checkbox"
+        @checked={{@changeset.isLive}}
+        name="is-live"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="promote-show">Guest Host</label>
+      <Input
+        @type="checkbox"
+        @checked={{@changeset.isGuest}}
+        name="is-live"
+      />
+    </div>
+
+    <div class="mb-4">
+      <ValidatedField
+        @type="text"
+        @changeset={{@changeset}}
+        @property="guest"
+      />
+    </div>
+
+    <div class="mb-4">
       <ValidatedField
         @type="text"
         @changeset={{@changeset}}
@@ -81,25 +107,7 @@
       {{/if}}
     </div>
 
-    <div class="mb-4">
-      <label for="promote-show">Promote this show</label>
-      <Input
-        @type="checkbox"
-        @checked={{@changeset.promoteShow}}
-        name="promote-show"
-      />
-    </div>
-
-    <div class="mb-4">
-      <label for="archive-show">Archive this show</label>
-      <Input
-        @type="checkbox"
-        @checked={{@changeset.archiveShow}}
-        name="archive-show"
-      />
-    </div>
-
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between mb-4">
       {{#if @changeset.isValid}}
         {{#if this.isSaving}}
           <button disabled class="btn cursor-pointer opacity-50 cursor-not-allowed"></button>
@@ -118,6 +126,14 @@
           @value="Save"
         />
       {{/if}}
+    </div>
+
+    <div class="flex items-center justify-between">
+      <Input
+        @type="submit"
+        class="btn bg-red-500 cursor-pointer"
+        @value="Delete"
+      />
     </div>
   </form>
 </div>
